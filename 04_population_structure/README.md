@@ -25,6 +25,6 @@ Commands are provided for:
 
 `03_prepare_TreeMix_migration_input.sh` – preparation of the four-population TreeMix input used for migration and f4 analyses.
 
-`04_TreeMix_migration_pipeline.sh` – TreeMix population split and migration analyses following the Dahms et al. workflow.
+`04_TreeMix_migration_pipeline.sh` – TreeMix population split and migration analyses following the Dahms,2021 (https://github.com/carolindahms/TreeMix) workflow.
 
 `05_fourpop_f4.sh` – TreeMix four-population f4 statistics.
