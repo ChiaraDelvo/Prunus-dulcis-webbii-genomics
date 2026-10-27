@@ -19,12 +19,12 @@ The LD-pruned datasets were used for ADMIXTURE and TreeMix-based analyses.
 
 Commands are provided for:
 
-`02_ADMIXTURE.sh` – individual ancestry estimation.
+`01_ADMIXTURE.sh` – individual ancestry estimation.
 
-`03_threepop_f3.sh` – preparation of population-stratified allele frequencies and TreeMix three-population f3 statistics.
+`02_threepop_f3.sh` – preparation of population-stratified allele frequencies and TreeMix three-population f3 statistics.
 
-`04_prepare_TreeMix_migration_input.sh` – preparation of the four-population TreeMix input used for migration and f4 analyses.
+`03_prepare_TreeMix_migration_input.sh` – preparation of the four-population TreeMix input used for migration and f4 analyses.
 
-`05_TreeMix_migration_pipeline.sh` – TreeMix population split and migration analyses following the Dahms et al. workflow.
+`04_TreeMix_migration_pipeline.sh` – TreeMix population split and migration analyses following the Dahms et al. workflow.
 
-`06_fourpop_f4.sh` – TreeMix four-population f4 statistics.
+`05_fourpop_f4.sh` – TreeMix four-population f4 statistics.
