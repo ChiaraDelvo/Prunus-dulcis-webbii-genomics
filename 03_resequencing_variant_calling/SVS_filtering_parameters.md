@@ -10,11 +10,19 @@ The original SNP filtering was performed using SVS with the following criteria:
 | Variant type | SNP |
 | Number of alleles | 2 |
 | Variant quality | ≥30 |
-| SNP call rate | ≥90% || Chromosome 0 | Excluded |
+| Chromosome 0 | Excluded |
 | INDELs | Excluded |
 
 Two filtering schemes were subsequently considered:
 
-**Set1:** SNP call rate ≥90% and MAF ≥0.05.
+**Set1:** SNP call rate ≥90%
 
-**Set2:** SNP call rate ≥90%, without MAF filtering. The exact population-specific nucleotide-diversity commands based on this filtering scheme are provided in `05_diversity_inbreeding_LD`.
+MAF ≥0.05
+
+**Set2:** SNP call rate ≥90%
+
+no MAF filtering
+
+Set1 was used for population structure, inbreeding, LD decay, and downstream population-genomic analyses
+
+Set2 was used for nucleotide-diversity analyses.
