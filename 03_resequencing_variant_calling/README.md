@@ -33,14 +33,14 @@ The corresponding command is reported in `03_platypus_variant_calling.sh`.
 
 SNP filtering in the original analysis was performed using SNP & Variation Suite (SVS) v8.8.3 (Golden Helix, Bozeman, MT, USA).
 
-Biallelic SNPs were retained after excluding INDELs and variants located on chromosome 0 and applying a minimum variant quality score of 30 and a SNP call rate of at least 90%.
+Biallelic SNPs were retained after excluding INDELs and variants located on chromosome 0 and applying a minimum variant quality score of 30.
 
-Two filtering schemes were used for downstream analyses:
+Two filtered datasets were generated independently for each reference assembly:
 
 `set1`: SNP call rate ≥90% and MAF ≥0.05.
 
-`set2`: SNP call rate ≥90%, without MAF filtering. This dataset was used for population-specific nucleotide-diversity analyses; the corresponding commands are provided in `05_diversity_inbreeding_LD`.
+`set2`: SNP call rate ≥90%, without MAF filtering.
 
 The filtering parameters originally applied in SVS are summarized in `SVS_filtering_parameters.md`.
 
-For reproducibility using open-source software, `04_vcftools_equivalent_filtering.sh` provides the VCFtools implementation of the variant-filtering criteria used to generate the `set1` dataset. This command represents an open-source equivalent of the filtering criteria originally applied in SVS.
+For reproducibility using open-source software, `04_vcftools_equivalent_filtering.sh` provides the VCFtools implementation of the variant-filtering criteria used to generate the `set1` and `set2` dataset. This command represents an open-source equivalent of the filtering criteria originally applied in SVS.
