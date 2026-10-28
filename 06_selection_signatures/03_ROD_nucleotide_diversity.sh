@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-VCF=<DP9_HAP2_SET1_VCF>
+VCF=<DP9_Hap2_set1.vcf>
 
 PW="../metadata/K1_Pw_IDs.txt"
 PD="../metadata/K2_Pd_IDs.txt"
+
+# VCFtools v0.1.14
 
 
 ############################################################
@@ -15,7 +17,7 @@ vcftools \
     --keep "${PW}" \
     --window-pi 10000 \
     --window-pi-step 5000 \
-    --out PI_Pw_WS10k_SS5k
+    --out DP9H2_PI_Pw_WS10k_SS5k
 
 
 ############################################################
@@ -27,25 +29,26 @@ vcftools \
     --keep "${PD}" \
     --window-pi 10000 \
     --window-pi-step 5000 \
-    --out PI_Pd_WS10k_SS5k
+    --out DP9H2_PI_Pd_WS10k_SS5k
 
 
 ############################################################
-# ROD definition used downstream
+# Reduction of diversity
 ############################################################
 
 # ROD = 1 - (pi_query / pi_reference)
 #
-# P. dulcis:
-# ROD_Pd = 1 - (pi_Pd / pi_Pw)
+# Selection scan in P. dulcis:
+#   ROD_Pd = 1 - (pi_Pd / pi_Pw)
 #
-# P. webbii:
-# ROD_Pw = 1 - (pi_Pw / pi_Pd)
+# Selection scan in P. webbii:
+#   ROD_Pw = 1 - (pi_Pw / pi_Pd)
 #
-# pi = 0 was assigned to monomorphic windows within each population.
+# A value of pi = 0 was assigned to monomorphic windows
+# within each population.
 #
-# Windows with fewer than 10 variants in total across the two
-# populations were excluded from downstream analyses.
+# Windows containing fewer than 10 variants in total across
+# both populations were excluded from downstream analyses.
 #
-# Only positive ROD values were considered when defining the
-# upper 5% of the ROD distribution.
+# Only positive ROD values were considered when identifying
+# windows in the upper percentile of the ROD distribution.
