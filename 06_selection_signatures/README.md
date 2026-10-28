@@ -41,5 +41,3 @@ Putative selection signals were defined as windows supported by at least two of 
 Variants located within `MYB61`, `COMT`, and `F5H`, including regions extending 3 kb upstream and 1 kb downstream of the gene boundaries, were further characterized using per-site FST and Ensembl Variant Effect Predictor (VEP).
 
 Per-site FST commands are provided in `04_candidate_gene_FST.sh`, whereas variant extraction and VEP analysis are reported in `05_VEP.sh`.
-
-The genomic intervals used for these analyses are also summarized in `metadata/candidate_gene_regions_DP9_Hap2.tsv`.
