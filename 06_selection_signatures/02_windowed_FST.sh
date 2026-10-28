@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-VCF=<DP9_HAP2_SET1_VCF>
+VCF=<DP9_Hap2_set1.vcf>
 
 PW="../metadata/K1_Pw_IDs.txt"
 PD="../metadata/K2_Pd_IDs.txt"
+
+# VCFtools v0.1.14
 
 vcftools \
     --vcf "${VCF}" \
@@ -11,10 +13,14 @@ vcftools \
     --weir-fst-pop "${PD}" \
     --fst-window-size 10000 \
     --fst-window-step 5000 \
-    --out Pw_vs_Pd_WS10k_SS5k
+    --out DP9H2_Pw_vs_Pd_FST_WS10k_SS5k
 
 
-# Downstream filtering used for selection-signal definition:
-# retain windows with N_VARIANTS >= 10.
+############################################################
+# Downstream filtering
+############################################################
+
+# Windows containing fewer than 10 variants were excluded
+# from downstream selection-signal analyses.
 #
-# The WEIGHTED_FST statistic was used for downstream analyses.
+# WEIGHTED_FST was used as the window-level FST statistic.
