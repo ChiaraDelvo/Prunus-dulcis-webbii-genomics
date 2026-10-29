@@ -1,0 +1,73 @@
+WGS_ID 	Manuscript_ID	Name	Species	K2_group
+W92	AQT2	AQT2	Prunus webbii	Admixed
+W93	AQT3	AQT3	Prunus webbii	Admixed
+W47	CMD4	CMD4	Prunus webbii	Admixed
+W55	FER1	FER1	Prunus webbii	Admixed
+W44	FER2	FER2	Prunus webbii	Admixed
+W26	FER3	FER3	Prunus webbii	Admixed
+W52	FER4	FER4	Prunus webbii	Admixed
+W45	NDC1	NDC1	Prunus webbii	Admixed
+W40	NDC3	NDC3	Prunus webbii	Admixed
+W54	NDC4	NDC4	Prunus webbii	Admixed
+W19	LMR3	LMR3	Prunus webbii	Admixed
+W69	LMR4	LMR4	Prunus webbii	Admixed
+W115	QSN2	QSN2	Prunus webbii	Admixed
+W13	CAP1	CAP1	Prunus webbii	Admixed
+W14	CAP2	CAP2	Prunus webbii	Admixed
+W39	CAP3	CAP3	Prunus webbii	Admixed
+W23	CAP4	CAP4	Prunus webbii	Admixed
+D149	ALB	Albanese	Prunus dulcis	Admixed
+W86	AQT1	AQT1	Prunus webbii	K1_Pw
+W85	AQT4	AQT4	Prunus webbii	K1_Pw
+W64	DP1	DP1	Prunus webbii	K1_Pw
+W81	DP2	DP2	Prunus webbii	K1_Pw
+W62	DP3	DP3	Prunus webbii	K1_Pw
+W63	DP9	DP9	Prunus webbii	K1_Pw
+W41	CMD1	CMD1	Prunus webbii	K1_Pw
+W49	CMD2	CMD2	Prunus webbii	K1_Pw
+W30	CMD3	CMD3	Prunus webbii	K1_Pw
+W28	NDC2	NDC2	Prunus webbii	K1_Pw
+W29	DEV1	DEV1	Prunus webbii	K1_Pw
+W36	DEV2	DEV2	Prunus webbii	K1_Pw
+W24	DEV3	DEV3	Prunus webbii	K1_Pw
+W3	DEV4	DEV4	Prunus webbii	K1_Pw
+W75	LMR1	LMR1	Prunus webbii	K1_Pw
+W95	LMR2	LMR2	Prunus webbii	K1_Pw
+W117	QSN1	QSN1	Prunus webbii	K1_Pw
+W121	QSN3	QSN3	Prunus webbii	K1_Pw
+W111	QSN4	QSN4	Prunus webbii	K1_Pw
+D150	ADV	Antonio de vito	Prunus dulcis	K2_Pd
+D124	ARD	Ardechoise	Prunus dulcis	K2_Pd
+D162	CIA	Ciavea	Prunus dulcis	K2_Pd
+D163	CIC	Cicerchia amara	Prunus dulcis	K2_Pd
+W109	CRM	Cristomorto	Prunus dulcis	K2_Pd
+D165	DAV	Davey	Prunus dulcis	K2_Pd
+W132	DEH	Dehn	Prunus dulcis	K2_Pd
+D131	DSL	Desmajo Rojo	Prunus dulcis	K2_Pd
+W100	DSR	Desmayo Largueta	Prunus dulcis	K2_Pd
+D168	FAL	Falsa catuccia	Prunus dulcis	K2_Pd
+D169	FEN	Ferrante	Prunus dulcis	K2_Pd
+W136	FLC	Filippo cea	Prunus dulcis	K2_Pd
+D145	FOU	Fourcouronne	Prunus dulcis	K2_Pd
+D171	FDB	Fournat de Brézenaud	Prunus dulcis	K2_Pd
+D173	GAL	Galgano	Prunus dulcis	K2_Pd
+W106	GEN	Genco Laera	Prunus dulcis	K2_Pd
+D138	IRE	Irene Lazolla	Prunus dulcis	K2_Pd
+D127	MAR	Marcona	Prunus dulcis	K2_Pd
+W102	MDT	Mollar de Taragona	Prunus dulcis	K2_Pd
+D188	NIK	Nikitsky	Prunus dulcis	K2_Pd
+D189	NCL	Nocella	Prunus dulcis	K2_Pd
+D195	PIS	Piscalze	Prunus dulcis	K2_Pd
+D198	PRI	Primicerio	Prunus dulcis	K2_Pd
+D203	RAC	Rachelina	Prunus dulcis	K2_Pd
+D205	REA	Reale	Prunus dulcis	K2_Pd
+D122	RID	Ridenhome	Prunus dulcis	K2_Pd
+D209	SAN	Santeramo	Prunus dulcis	K2_Pd
+D214	SYM	Symmetrike	Prunus dulcis	K2_Pd
+W101	TEX	Texas	Prunus dulcis	K2_Pd
+D218	TRI	Tribuzio	Prunus dulcis	K2_Pd
+W107	TUO	Yuono	Prunus dulcis	K2_Pd
+W126	VES	Vesta	Prunus dulcis	K2_Pd
+D219	VIS	Viscarda	Prunus dulcis	K2_Pd
+D221	YAL	Yaltinsky	Prunus dulcis	K2_Pd
+D222	ZAN	Zanzanidde	Prunus dulcis	K2_Pd
