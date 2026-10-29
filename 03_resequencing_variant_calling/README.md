@@ -42,5 +42,3 @@ Two filtered datasets were generated independently for each reference assembly:
 `set2`: SNP call rate ≥90%, without MAF filtering.
 
 The filtering parameters originally applied in SVS are summarized in `SVS_filtering_parameters.md`.
-
-For reproducibility using open-source software, `04_vcftools_equivalent_filtering.sh` provides the VCFtools implementation of the variant-filtering criteria used to generate the `set1` and `set2` dataset. This command represents an open-source equivalent of the filtering criteria originally applied in SVS.
