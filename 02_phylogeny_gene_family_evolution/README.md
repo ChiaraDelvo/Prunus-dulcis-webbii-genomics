@@ -7,33 +7,30 @@ Phylogenomic analyses were independently performed using two alternative haploty
 
 Each analysis also included the reference proteomes of *P. davidiana*, *P. ferganensis*, *P. kansuensis*, *P. mira*, *P. mongolica*, *P. persica*, and *P. mume*.
 
-## Orthogroup inference and phylogenetic reconstruction
+## Orthogroup inference
 
-Orthogroups were inferred using OrthoFinder, and single-copy orthogroups were retained for phylogenetic reconstruction.
+Orthogroups were inferred with OrthoFinder v3 in MSA mode, using DIAMOND ultra-sensitive searches, MAFFT alignments, and RAxML-NG gene trees.
 
-Protein sequences from single-copy orthogroups were aligned using MAFFT. Alignments were subsequently trimmed according to the criteria described in the manuscript and concatenated into a supermatrix.
+Commands are reported in `01_OrthoFinder.sh`.
 
-Maximum-likelihood phylogenetic trees were inferred using IQ-TREE with 100 non-parametric bootstrap replicates.
+## Species tree
 
-Tree topology was independently assessed using the coalescent-based ASTRAL-Pro3 approach.
+The species-tree alignment produced by OrthoFinder was used for maximum-likelihood inference with IQ-TREE v2.4.0 under ModelFinder (`MFP`) and 1,000 ultrafast bootstrap replicates.
 
-Commands are reported in `01_OrthoFinder.sh` to `05_ASTRAL_Pro3.sh`.
+The resolved gene trees were concatenated and summarised with ASTRAL-Pro3 v1.25.3.8, rooted on `Prunus_mume`. Each gene was mapped to the species given by the first two fields of its name.
+
+Commands are reported in `02_IQTREE.sh` and `06_ASTRAL_Pro3.sh`.
 
 ## Divergence-time calibration
 
-Phylogenetic trees were converted to ultrametric trees using the divergence between *P. persica* and *P. dulcis* (5.88 MYA) as calibration.
+The species tree (`newTree.nwk`) was dated in R with `ape`, `phytools`, and `castor`. The tree was rooted on `Prunus_mume`. The *P. persica*–*P. dulcis* split (`Prunus_persica` and `TU_Hap1`) was set to 5.8 million years by rescaling the root age. The ultrametric tree is `tree_dated.nwk`.
 
-Details of the software and command used for time calibration are reported in `06_time_calibration.md`.
+Commands are reported in `03_time_calibration.R`.
 
 ## Gene family evolution
 
-Gene-family expansions and contractions were inferred using CAFE v4.2.1 from the time-calibrated phylogenetic trees.
+`04_ultrametric.sh` does not date the tree again. It lowercases `tree_dated.nwk` from the R calibration and formats the OrthoFinder gene counts for CAFE. The count table keeps the family identifier plus the taxa used in the tree.
 
-Before CAFE analysis, gene families were filtered to:
+CAFE estimated a global gene gain/loss rate (`lambda -s`). P-values used 1,000 Monte Carlo samples. Family-wise expansions and contractions were summarised from the CAFE report.
 
-- retain families present in at least two species;
-- exclude families containing ≥100 gene copies in any species.
-
-The custom filtering script is provided in `07_CAFE_family_filtering.py`.
-
-The CAFE workflow is reported in `08_CAFE.sh`.
+Commands are reported in `04_ultrametric.sh` and `05_CAFE.sh`.

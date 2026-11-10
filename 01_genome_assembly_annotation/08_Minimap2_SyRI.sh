@@ -1,33 +1,72 @@
 #!/usr/bin/env bash
 
-REF=<REFERENCE_HAPLOTYPE.fasta>
-QRY=<QUERY_HAPLOTYPE.fasta>
+# Pairwise whole-genome alignment and structural-rearrangement detection.
+# Minimap2 alignments are sorted to BAM and passed to SyRI.
+# --eqx writes =/X CIGAR operators, which SyRI requires.
+#
+# Comparisons, in plotsr chain order:
+#   DP9 haplotype 1  (DP9_1.fasta) vs DP9 haplotype 2  (DP9_2.fasta)
+#   DP9 haplotype 2  (DP9_2.fasta) vs Tuono haplotype 1 (TU_1.fasta)
+#   Tuono haplotype 1 (TU_1.fasta) vs Tuono haplotype 2 (TU_2.fasta)
+#
+# SyRI and plotsr are run from Biocontainers images. The working
+# directory is mounted at /data inside the container.
+#
+# Containers:
+#   SyRI     1.6.3   quay.io/biocontainers/syri:1.6.3--py39he10ea66_1
+#   plotsr   1.0.0   quay.io/biocontainers/plotsr:1.0.0--pyh7cba7a3_0
+#
+# Example:
+#   docker run --rm -v $PWD:/data -w /data \
+#     quay.io/biocontainers/syri:1.6.3--py39he10ea66_1 <command>
 
+THREADS=4
+
+############################################################
 # Minimap2 v2.24
-# Pairwise whole-genome alignment
+############################################################
 
-minimap2 \
-    -ax asm5 \
-    "${REF}" \
-    "${QRY}" \
-    > alignment.sam
+minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_1.fasta DP9_2.fasta \
+    | samtools sort -O BAM - > DP9_Hap1_DP9_Hap2.bam
 
+minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_2.fasta TU_1.fasta \
+    | samtools sort -O BAM - > DP9_Hap2_TU_Hap1.bam
+
+minimap2 -ax asm5 -t "${THREADS}" --eqx TU_1.fasta TU_2.fasta \
+    | samtools sort -O BAM - > TU_Hap1_TU_Hap2.bam
 
 ############################################################
 # SyRI v1.6.3
 ############################################################
+# -F B: the alignment is BAM. Output is <prefix>syri.out.
 
-syri \
-    -c alignment.sam \
-    -r "${REF}" \
-    -q "${QRY}" \
-    <ADDITIONAL_PARAMETERS>
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/syri:1.6.3--py39he10ea66_1 \
+    syri -c DP9_Hap1_DP9_Hap2.bam -r DP9_1.fasta -q DP9_2.fasta \
+        -F B --prefix DP9_Hap1_DP9_Hap2
 
-# Pairwise comparisons:
-#
-# DP9_Hap1  vs DP9_Hap2
-# DP9_Hap2  vs Tuono_Hap1
-# Tuono_Hap1 vs Tuono_Hap2
-#
-# TODO [BIOINFORMATICIAN]:
-# Add the exact original SyRI command and any SAM/BAM preprocessing.
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/syri:1.6.3--py39he10ea66_1 \
+    syri -c DP9_Hap2_TU_Hap1.bam -r DP9_2.fasta -q TU_1.fasta \
+        -F B --prefix DP9_Hap2_TU_Hap1
+
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/syri:1.6.3--py39he10ea66_1 \
+    syri -c TU_Hap1_TU_Hap2.bam -r TU_1.fasta -q TU_2.fasta \
+        -F B --prefix TU_Hap1_TU_Hap2
+
+############################################################
+# plotsr v1.0.0
+############################################################
+# genomes.txt is tab-separated (file, name) and must list the
+# assemblies in the same order as the alignment chain:
+# DP9_1.fasta, DP9_2.fasta, TU_1.fasta, TU_2.fasta.
+
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/plotsr:1.0.0--pyh7cba7a3_0 \
+    plotsr \
+        --sr DP9_Hap1_DP9_Hap2syri.out \
+        --sr DP9_Hap2_TU_Hap1syri.out \
+        --sr TU_Hap1_TU_Hap2syri.out \
+        --genomes genomes.txt \
+        -o output_plot.png

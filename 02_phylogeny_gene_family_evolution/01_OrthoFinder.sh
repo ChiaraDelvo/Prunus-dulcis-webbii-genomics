@@ -1,29 +1,28 @@
 #!/usr/bin/env bash
 
-PROTEOMES=<PROTEOME_DIRECTORY>
-THREADS=<N_THREADS>
+# Orthogroup inference with OrthoFinder v3 in MSA mode.
+# Searches use DIAMOND ultra-sensitive. Alignments are MAFFT.
+# Gene trees are RAxML-NG.
+#
+# The two haplotype combinations are analysed separately.
+# Each input directory contains one proteome FASTA per species:
+#   Input_Hap1: Tuono_Hap1, DP9_Hap1, and seven reference Prunus proteomes
+#   Input_Hap2: Tuono_Hap2, DP9_Hap2, and the same reference proteomes
+#
+# OrthoFinder is run from the conda environment orthofinder3.
 
-# OrthoFinder v3.0.1b1
+THREADS=10
+ANALYSIS_THREADS=10
 
-orthofinder \
-    -f "${PROTEOMES}" \
-    -t "${THREADS}"
-
-# Two independent runs were performed:
-#
-# Run 1:
-#   Tuono_Hap1
-#   DP9_Hap1
-#   + seven reference Prunus proteomes
-#
-# Run 2:
-#   Tuono_Hap2
-#   DP9_Hap2
-#   + seven reference Prunus proteomes
-#
-# TODO [BIOINFORMATICIAN]:
-# Confirm the exact OrthoFinder version and original command,
-# including any additional non-default parameters.
-#
-# Single-copy orthogroups were retained for downstream
-# phylogenetic analyses.
+for HAP in Hap1 Hap2; do
+    conda run -n orthofinder3 --no-capture-output \
+        orthofinder \
+            -t "${THREADS}" \
+            -a "${ANALYSIS_THREADS}" \
+            -M msa \
+            -S diamond_ultra_sens \
+            -A mafft \
+            -T raxml-ng \
+            -o "Results_${HAP}" \
+            -f "Input_${HAP}"
+done
