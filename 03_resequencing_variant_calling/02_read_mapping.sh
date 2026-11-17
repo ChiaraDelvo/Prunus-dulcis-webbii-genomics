@@ -9,15 +9,19 @@
 # is mounted at /data inside the container.
 #
 # Containers:
-#   Minimap2   2.28   quay.io/biocontainers/minimap2:2.28--h577a1d6_4
+#   Minimap2   2.24   quay.io/biocontainers/minimap2:2.24--h7132678_1
 #   samtools   1.21   quay.io/biocontainers/samtools:1.21--h96c455f_1
+#
+#
+# REF= Tuono_Hap1 or DP9_Hap2
+
 
 TRIM_DIR=TrimmedOutput/Trimmed_files
 REF_DIR=Reference
 ALN_DIR=alignment
-REF_FASTA=${REF_DIR}/TU_1.fasta
-REF_MMI=${REF_DIR}/TU_1.mmi
-MINIMAP2_IMG=quay.io/biocontainers/minimap2:2.28--h577a1d6_4
+REF_FASTA=${REF_DIR}/${REF}.fasta
+REF_MMI=${REF_DIR}/${REF}.mmi
+MINIMAP2_IMG=quay.io/biocontainers/minimap2:2.24--h7132678_1
 SAMTOOLS_IMG=quay.io/biocontainers/samtools:1.21--h96c455f_1
 
 mkdir -p "${ALN_DIR}"

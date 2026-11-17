@@ -5,12 +5,13 @@
 # comma-separated list. Duplicates are retained.
 #
 # Platypus is run from the conda environment platypus.
+# REF= Tuono_Hap1 or DP9_Hap2
 
 BASE_DIR="."
 ALN_DIR="${BASE_DIR}/alignment"
-REF_FASTA="${BASE_DIR}/Reference/TU_1.fasta"
+REF_FASTA="${BASE_DIR}/Reference/${REF}.fasta"
 OUT_DIR="${BASE_DIR}/variantCalling"
-OUT_VCF="${OUT_DIR}/Variant_calling_Platypus_TU_Hap1.vcf"
+OUT_VCF="${OUT_DIR}/Variant_calling_Platypus_${REF}.vcf"
 
 mkdir -p "${OUT_DIR}"
 

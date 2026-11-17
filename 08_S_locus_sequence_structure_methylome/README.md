@@ -4,7 +4,7 @@
 
 S-locus genomic intervals from the four `Tuono` and `DP9` haplotypes were defined using the best BLASTn matches to the S1 SFB (GenBank `MH316096.1`) and SLF (GenBank `MH316056.1`) sequences.
 
-Syntenic relationships among the extracted haplotypes were identified using Minimap2 with the `asm20` preset.
+Syntenic relationships among the extracted haplotypes were identified using Minimap2 v2.24 with the `asm20` preset.
 
 ## Whole-genome bisulfite sequencing analysis
 

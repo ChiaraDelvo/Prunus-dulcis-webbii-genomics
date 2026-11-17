@@ -3,7 +3,7 @@
 # Filter the two initial haplotype assemblies:
 #   (i)   remove contigs shorter than 50 kb
 #   (ii)  keep Viridiplantae (including child taxa) and unclassified contigs
-#   (iii) align remaining contigs to the Nonpareil organellar genomes
+#   (iii) discard remaining contigs covered by the Nonpareil organellar genomes
 #
 # Tools are run from Biocontainers images. The working directory is mounted
 # at /data. The Kraken2 database directory is mounted read-only at /db.
@@ -12,7 +12,7 @@
 #   seqtk        1.4     quay.io/biocontainers/seqtk:1.4--h577a1d6_3
 #   Kraken2      2.1.6   quay.io/biocontainers/kraken2:2.1.6--pl5321h077b44d_0
 #   KrakenTools  1.2     quay.io/biocontainers/krakentools:1.2--pyh7e72e81_1
-#   Minimap2     2.17    quay.io/biocontainers/minimap2:2.17--hed695b0_3
+#   Minimap2     2.24    quay.io/biocontainers/minimap2:2.24--h7132678_1
 #
 # Example:
 #   docker run --rm -v $PWD:/data -w /data \
@@ -67,7 +67,7 @@ for HAP in Hap1 Hap2; do
             -o "${PREFIX}_kraken_clean.fasta"
 
     ############################################################
-    # (iii) Minimap2 v2.17 — organellar synteny
+    # (iii) Minimap2 v2.24 — organellar synteny
     ############################################################
     # Align to the Nonpareil mitochondrial (CM038036.1) and chloroplast
     # (CM038037.1) genomes. A contig is removed when either genome covers
@@ -75,13 +75,13 @@ for HAP in Hap1 Hap2; do
     # coverage from the two genomes is not added together.
 
     docker run --rm -v "${PWD}:/data" -w /data \
-        quay.io/biocontainers/minimap2:2.17--hed695b0_3 \
+        quay.io/biocontainers/minimap2:2.24--h7132678_1 \
         minimap2 -x asm5 -t "${THREADS}" \
             "${NONPAREIL_MT}" "${PREFIX}_kraken_clean.fasta" \
         > "${PREFIX}_vs_mt.paf"
 
     docker run --rm -v "${PWD}:/data" -w /data \
-        quay.io/biocontainers/minimap2:2.17--hed695b0_3 \
+        quay.io/biocontainers/minimap2:2.24--h7132678_1 \
         minimap2 -x asm5 -t "${THREADS}" \
             "${NONPAREIL_CP}" "${PREFIX}_kraken_clean.fasta" \
         > "${PREFIX}_vs_cp.paf"

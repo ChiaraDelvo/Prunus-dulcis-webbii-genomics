@@ -9,7 +9,9 @@ Each analysis also included the reference proteomes of *P. davidiana*, *P. ferga
 
 ## Orthogroup inference
 
-Orthogroups were inferred with OrthoFinder v3 in MSA mode, using DIAMOND ultra-sensitive searches, MAFFT alignments, and RAxML-NG gene trees.
+Orthogroups were inferred using OrthoFinder, and single-copy orthogroups were retained for phylogenetic reconstruction.
+
+Protein sequences from single-copy orthogroups were aligned using MAFFT. Alignments were subsequently trimmed according to the criteria described in the manuscript and concatenated into a supermatrix.
 
 Commands are reported in `01_OrthoFinder.sh`.
 
@@ -19,7 +21,7 @@ The species-tree alignment produced by OrthoFinder was used for maximum-likeliho
 
 The resolved gene trees were concatenated and summarised with ASTRAL-Pro3 v1.25.3.8, rooted on `Prunus_mume`. Each gene was mapped to the species given by the first two fields of its name.
 
-Commands are reported in `02_IQTREE.sh` and `06_ASTRAL_Pro3.sh`.
+Commands are reported in `02_IQTREE.sh` and `02b_ASTRAL_Pro3.sh`.
 
 ## Divergence-time calibration
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Maximum-likelihood species tree from the OrthoFinder species-tree alignment.
-# ModelFinder (MFP) selects the substitution model. Support is 1,000
+# ModelFinder (MFP) selects the substitution model. Support is 100
 # ultrafast bootstrap replicates.
 #
 # IQ-TREE is run from a Biocontainers image. Each OrthoFinder results
@@ -15,7 +15,7 @@
 # Example:
 #   docker run --rm -v $PWD:/in -w /in \
 #     quay.io/biocontainers/iqtree:2.4.0--h503566f_0 \
-#     iqtree -s SpeciesTreeAlignment.fa -m MFP -nt 10 --prefix IQTREE -B 1000
+#     iqtree -s SpeciesTreeAlignment.fa -m MFP -nt 10 --prefix IQTREE -B 100
 
 THREADS=10
 SPECIES_ALIGNMENT=SpeciesTreeAlignment.fa
@@ -28,5 +28,5 @@ for HAP in Hap1 Hap2; do
             -m MFP \
             -nt "${THREADS}" \
             --prefix "/in/IQTREE" \
-            -B 1000
+            -B 100
 done

@@ -34,16 +34,14 @@ for HAP in Hap1 Hap2; do
     ############################################################
     # BUSCO v5.2.2
     ############################################################
-    # Lineages: eukaryota_odb10 and viridiplantae_odb10.
+    # Lineages: eudicots_odb10.
 
-    for LINEAGE in eukaryota_odb10 viridiplantae_odb10; do
-        docker run --rm -v "${PWD}:/data" -w /data \
-            quay.io/biocontainers/busco:5.2.2--pyhdfd78af_0 \
-            busco \
-                --in "${ASSEMBLY}" \
-                --mode genome \
-                --lineage_dataset "${LINEAGE}" \
-                --cpu "${THREADS}" \
-                --out "${GENOTYPE}_${HAP}_busco_initial_${LINEAGE%_odb10}"
-    done
+    docker run --rm -v "${PWD}:/data" -w /data \
+        quay.io/biocontainers/busco:5.2.2--pyhdfd78af_0 \
+        busco \
+            --in "${ASSEMBLY}" \
+            --mode genome \
+            --lineage_dataset eudicots_odb10 \
+            --cpu "${THREADS}" \
+            --out "${GENOTYPE}_${HAP}_busco_initial_eudicots"
 done

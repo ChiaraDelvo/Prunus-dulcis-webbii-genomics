@@ -9,10 +9,11 @@
 #   DP9 haplotype 2  (DP9_2.fasta) vs Tuono haplotype 1 (TU_1.fasta)
 #   Tuono haplotype 1 (TU_1.fasta) vs Tuono haplotype 2 (TU_2.fasta)
 #
-# SyRI and plotsr are run from Biocontainers images. The working
-# directory is mounted at /data inside the container.
+# Minimap2, SyRI, and plotsr are run from Biocontainers images. The
+# working directory is mounted at /data inside the container.
 #
 # Containers:
+#   Minimap2 2.24    quay.io/biocontainers/minimap2:2.24--h7132678_1
 #   SyRI     1.6.3   quay.io/biocontainers/syri:1.6.3--py39he10ea66_1
 #   plotsr   1.0.0   quay.io/biocontainers/plotsr:1.0.0--pyh7cba7a3_0
 #
@@ -26,13 +27,19 @@ THREADS=4
 # Minimap2 v2.24
 ############################################################
 
-minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_1.fasta DP9_2.fasta \
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/minimap2:2.24--h7132678_1 \
+    minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_1.fasta DP9_2.fasta \
     | samtools sort -O BAM - > DP9_Hap1_DP9_Hap2.bam
 
-minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_2.fasta TU_1.fasta \
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/minimap2:2.24--h7132678_1 \
+    minimap2 -ax asm5 -t "${THREADS}" --eqx DP9_2.fasta TU_1.fasta \
     | samtools sort -O BAM - > DP9_Hap2_TU_Hap1.bam
 
-minimap2 -ax asm5 -t "${THREADS}" --eqx TU_1.fasta TU_2.fasta \
+docker run --rm -v "${PWD}:/data" -w /data \
+    quay.io/biocontainers/minimap2:2.24--h7132678_1 \
+    minimap2 -ax asm5 -t "${THREADS}" --eqx TU_1.fasta TU_2.fasta \
     | samtools sort -O BAM - > TU_Hap1_TU_Hap2.bam
 
 ############################################################
