@@ -13,9 +13,6 @@ minimap2 \
     "${QUERY}" \
     > "${OUT}"
 
-# TODO [BIOINFORMATICIAN]:
-# Confirm the exact Minimap2 version and original command.
-#
 # S-locus interval boundaries were previously defined from the best
 # BLASTn matches to:
 #   SFB: MH316096.1
