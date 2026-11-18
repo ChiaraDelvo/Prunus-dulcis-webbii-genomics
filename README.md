@@ -20,10 +20,4 @@ Detailed software versions, commands, parameters, and input/output information a
 
 ## Data availability
 
-Raw sequencing data and genomic resources associated with the study are deposited in the repositories reported in the manuscript. Accession numbers and persistent identifiers will be provided here in the final repository release.
-
-## Code availability
-
-Scripts and computational workflows required to reproduce the analyses reported in the manuscript are provided in the corresponding directories of this repository.
-
-A versioned archival release of this repository will be deposited in Zenodo and assigned a persistent DOI upon completion.
+Raw sequencing data and genomic resources associated with the study are deposited in the repositories reported in the manuscript. 
