@@ -1,12 +1,10 @@
 # Whole-genome resequencing and SNP calling
 
-Whole-genome resequencing reads were processed independently against the `Tuono_Hap1` and `DP9_Hap2` assemblies with the same settings. Commands are therefore reported once in a reference-independent format
+Whole-genome resequencing reads were processed independently against the `Tuono_Hap1` and `DP9_Hap2` assemblies with the same settings. Commands are therefore reported once in a reference-independent format and can be applied to either dataset by specifying the corresponding reference genome and output prefix.
 
 Raw whole-genome resequencing FASTQ files are available through NCBI SRA under BioProject `PRJNA1381291`.
 
 The reference assemblies used for read mapping are available through NCBI under BioProject `PRJNA1387188` (`DP9_Hap2`) and `PRJNA1387209` (`Tuono_Hap1`).
-
-Commands are therefore reported once in a reference-independent format and can be applied to either dataset by specifying the corresponding reference genome and output prefix.
 
 ## Read trimming
 
