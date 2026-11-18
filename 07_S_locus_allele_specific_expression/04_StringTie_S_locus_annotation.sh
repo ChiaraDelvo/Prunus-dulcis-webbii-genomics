@@ -94,3 +94,13 @@ for BAM_PATH in "${S_LOCUS_DIR}"/*.bam; do
             "/out/Ref_${SAMPLE}.gtf" \
             "/out/NoRef_${SAMPLE}.gtf"
 done
+
+############################################################
+# Post-assembly S-RNase allele assignment
+############################################################
+
+# NOTE:
+# The Tuono_Hap2 S-RNase allele was subsequently assigned by
+# nucleotide-sequence similarity against the previously characterized
+# Sf S-RNase allele (GenBank accession MH730647.1) using the
+# NCBI BLASTn web interface.
