@@ -9,10 +9,6 @@ t_coffee \
     -seq "${INPUT}" \
     -outfile "${OUT}"
 
-# TODO [BIOINFORMATICIAN]:
-# Add the exact original T-COFFEE options and the command/options
-# used to obtain the pairwise sequence-similarity matrix.
-#
 # Analyses performed:
 # - S-RNase: Tuono, DP9, Lauranne Sf, Brown Nonpareil S1,
 #   and P. webbii alleles AM690352, AM690353, AM690354.
