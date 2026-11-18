@@ -2,9 +2,11 @@
 
 ## S-RNase and SFB sequence comparison
 
-Multiple sequence alignments of S-RNase and SFB alleles were performed using T-COFFEE v13.46.0.919e8c6b. Pairwise sequence-similarity matrices were also obtained using T-COFFEE.
+Multiple sequence alignments of S-RNase and SFB alleles, together with the corresponding pairwise sequence-similarity matrices, were generated using the T-COFFEE v13.46.0.919e8c6b web interface (https://www.ebi.ac.uk/jdispatcher/msa/tcoffee).
 
-Commands are reported in `01_TCOFFEE_alignments.sh`.
+For S-RNase, the analysis included the Tuono and DP9 alleles, the Lauranne Sf allele, the Brown Nonpareil S1 allele, and the *P. webbii* alleles AM690352, AM690353, and AM690354.
+
+For SFB, the analysis included the corresponding Tuono and DP9 haplotypes.
 
 ## S-locus structural comparison
 
