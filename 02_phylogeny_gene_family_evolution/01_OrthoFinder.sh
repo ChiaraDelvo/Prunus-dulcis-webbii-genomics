@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Orthogroup inference with OrthoFinder v3 in MSA mode.
-# Searches use DIAMOND ultra-sensitive. Alignments are MAFFT.
-# Gene trees are RAxML-NG.
+#Orthogroup inference was performed with OrthoFinder v3 in MSA mode, 
+#using DIAMOND in ultra-sensitive mode for sequence searches, 
+#MAFFT v7.526 for multiple sequence alignments, and RAxML-NG for gene-tree inference.
 #
 # The two haplotype combinations are analysed separately.
 # Each input directory contains one proteome FASTA per species:
