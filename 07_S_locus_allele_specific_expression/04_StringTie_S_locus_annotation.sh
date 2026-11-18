@@ -1,66 +1,106 @@
 #!/usr/bin/env bash
 
-S_LOCUS_BAM=<S_LOCUS_FILTERED.bam>
-BRAKER_GTF=<BRAKER3_ANNOTATION.gtf>
-
-GUIDED_GTF=<STRINGTIE_GUIDED.gtf>
-DENOVO_GTF=<STRINGTIE_DENOVO.gtf>
-MERGED_GTF=<STRINGTIE_MERGED.gtf>
-
-
-############################################################
-# TODO [BIOINFORMATICIAN]
+# Reconstruct S-locus transcripts with StringTie.
+# The full alignment is assembled first. Guided and de novo assemblies
+# then use the BAM restricted to the S locus (--rf, -j 3). Those two
+# GTFs are merged with the haplotype annotation.
+# Repeat for the other haplotypes by changing GENOME_DIR and GTF_FILE.
 #
-# Add the exact command used to extract RNA-seq alignments
-# mapping within the S-locus coordinates of each haplotype.
-############################################################
+# StringTie is run from a Biocontainers image.
+#
+# Containers:
+#   StringTie   2.2.3   quay.io/biocontainers/stringtie:2.2.3--h29c0135_1
 
+GENOME_DIR=References/DP9_Hap1
+GTF_FILE=DP9_Hap1_annotation.gtf
+BAM_DIR=03.Mapped
+S_LOCUS_DIR=S_locus_bam
+OUT_DIR=04.StringTie
+STRINGTIE_IMG=quay.io/biocontainers/stringtie:2.2.3--h29c0135_1
 
-############################################################
-# Reference-guided transcript assembly
-############################################################
-
-# StringTie v2.2.3
-
-stringtie "${S_LOCUS_BAM}" \
-    -G "${BRAKER_GTF}" \
-    -j 3 \
-    -o "${GUIDED_GTF}"
-
-# TODO:
-# Add any other non-default StringTie parameters used.
-
+mkdir -p "${OUT_DIR}"
 
 ############################################################
-# De novo transcript assembly
+# Full-alignment assembly
 ############################################################
 
-stringtie "${S_LOCUS_BAM}" \
-    -j 3 \
-    -o "${DENOVO_GTF}"
+for BAM_PATH in "${BAM_DIR}"/*Aligned.sortedByCoord.out.bam; do
+    [ -e "${BAM_PATH}" ] || continue
 
-# TODO:
-# Confirm whether -j 3 was also applied to the de novo run.
+    BAM_FILENAME=$(basename "${BAM_PATH}")
+    SAMPLE=${BAM_FILENAME%Aligned.sortedByCoord.out.bam}
 
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "${OUT_DIR}:/out" \
+        -v "${BAM_DIR}:/mapped:ro" \
+        -v "${GENOME_DIR}:/ref:ro" \
+        "${STRINGTIE_IMG}" \
+        stringtie "/mapped/${BAM_FILENAME}" \
+            --rf \
+            -G "/ref/${GTF_FILE}" \
+            -o "/out/${SAMPLE}.gtf" \
+            -p 1 \
+            -v
+done
 
 ############################################################
-# Merge guided and de novo transcript models
+# S-locus guided and de novo assembly, then merge
+############################################################
+# S_locus_bam holds the alignments restricted to the S locus.
+
+for BAM_PATH in "${S_LOCUS_DIR}"/*.bam; do
+    [ -e "${BAM_PATH}" ] || continue
+
+    BAM_FILENAME=$(basename "${BAM_PATH}")
+    SAMPLE=$(basename "${BAM_FILENAME}" .bam)
+
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "${OUT_DIR}:/out" \
+        -v "${S_LOCUS_DIR}:/in:ro" \
+        -v "${GENOME_DIR}:/ref:ro" \
+        "${STRINGTIE_IMG}" \
+        stringtie "/in/${BAM_FILENAME}" \
+            --rf \
+            -G "/ref/${GTF_FILE}" \
+            -o "/out/Ref_${SAMPLE}.gtf" \
+            -p 1 \
+            -j 3 \
+            -v
+
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "${OUT_DIR}:/out" \
+        -v "${S_LOCUS_DIR}:/in:ro" \
+        "${STRINGTIE_IMG}" \
+        stringtie "/in/${BAM_FILENAME}" \
+            --rf \
+            -o "/out/NoRef_${SAMPLE}.gtf" \
+            -p 1 \
+            -j 3 \
+            -v
+
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "${OUT_DIR}:/out" \
+        -v "${GENOME_DIR}:/ref:ro" \
+        "${STRINGTIE_IMG}" \
+        stringtie --merge \
+            -G "/ref/${GTF_FILE}" \
+            -p 1 \
+            -v \
+            -o "/out/${SAMPLE}_merged.gtf" \
+            "/out/Ref_${SAMPLE}.gtf" \
+            "/out/NoRef_${SAMPLE}.gtf"
+done
+
+############################################################
+# Post-assembly S-RNase allele assignment
 ############################################################
 
-printf "%s\n%s\n" \
-    "${GUIDED_GTF}" \
-    "${DENOVO_GTF}" \
-    > mergelist.txt
-
-stringtie --merge \
-    -o "${MERGED_GTF}" \
-    mergelist.txt
 # NOTE:
 # The Tuono_Hap2 S-RNase allele was subsequently assigned by
-# nucleotide-sequence similarity against the Sf S-RNase allele
-# (GenBank MH730647.1) using the NCBI BLASTn web interface.
-
-
-# TODO [BIOINFORMATICIAN]:
-# Confirm whether a reference annotation (-G) or other options
-# were also provided during the merge step.
+# nucleotide-sequence similarity against the previously characterized
+# Sf S-RNase allele (GenBank accession MH730647.1) using the
+# NCBI BLASTn web interface.
