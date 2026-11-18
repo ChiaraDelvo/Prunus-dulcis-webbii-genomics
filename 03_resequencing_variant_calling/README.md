@@ -1,6 +1,6 @@
 # Whole-genome resequencing and SNP calling
 
-Whole-genome resequencing reads were processed independently against the `Tuono_Hap1` and `DP9_Hap2` assemblies with the same settings. 
+Whole-genome resequencing reads were processed independently against the `Tuono_Hap1` and `DP9_Hap2` assemblies with the same settings. Commands are therefore reported once in a reference-independent format
 
 Raw whole-genome resequencing FASTQ files are available through NCBI SRA under BioProject `PRJNA1381291`.
 
