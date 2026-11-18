@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
-REFERENCE=<S_LOCUS_HAPLOTYPE_REFERENCE.fasta>
-QUERY=<S_LOCUS_HAPLOTYPE_QUERY.fasta>
-OUT=<OUTPUT.paf>
-
 # Minimap2 v2.24
-# Synteny comparison
+#
+# All-vs-all comparison of the S-locus haplotype sequences.
+# A single multi-FASTA file containing the S-locus sequences from
+# the four haplotypes was aligned against itself to identify
+# collinear and homologous regions among haplotypes.
+
+MULTIFASTA=<S_LOCUS_HAPLOTYPES.fasta>
+OUT=<OUTPUT.paf>
 
 minimap2 \
     -x asm20 \
-    "${REFERENCE}" \
-    "${QUERY}" \
+    -D \
+    -P \
+    "${MULTIFASTA}" \
+    "${MULTIFASTA}" \
     > "${OUT}"
+
 
 # S-locus interval boundaries were previously defined from the best
 # BLASTn matches to:
 #   SFB: MH316096.1
 #   SLF: MH316056.1
-#
-# Add the exact BLASTn procedure if performed through a command-line
-# implementation.
