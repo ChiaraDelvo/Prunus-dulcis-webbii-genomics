@@ -9,12 +9,9 @@ Each analysis also included the reference proteomes of *P. davidiana*, *P. ferga
 
 ## Orthogroup inference
 
-Orthogroups were inferred using OrthoFinder, and single-copy orthogroups were retained for phylogenetic reconstruction.
+Orthogroup inference was performed following the OrthoFinder v3.0.1b1 workflow, using DIAMOND in ultra-sensitive mode for sequence searches, MAFFT v7.526 for multiple sequence alignments, the default MSA trimming procedure, and RAxML-NG for gene-tree inference. Single-copy orthogroups were retained, and the corresponding trimmed alignments were concatenated into a supermatrix for downstream phylogenetic inference. 
 
-Protein sequences from single-copy orthogroups were aligned using MAFFT. Alignments were subsequently trimmed according to the criteria described in the manuscript and concatenated into a supermatrix.
-
-Commands are reported in `01_OrthoFinder.sh`.
-
+The corresponding OrthoFinder command is reported in `01_OrthoFinder.sh`.
 ## Species tree
 
 The species-tree alignment produced by OrthoFinder was used for maximum-likelihood inference with IQ-TREE v2.4.0 under ModelFinder (`MFP`) and 1,000 ultrafast bootstrap replicates.
