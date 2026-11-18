@@ -40,6 +40,6 @@ The corresponding command is reported in `08_deepTools_coverage.sh`.
 
 ## Genomic-track visualization
 
-Methylation and read-coverage bigWig tracks and the gene annotation were drawn with pyGenomeTracks v2.1. `make_tracks_file` wrote `tracks.ini` from the bigWig files and a GTF.
+Methylation and read-coverage bigWig tracks and the gene annotation were drawn with pyGenomeTracks v2.1.
 
 The corresponding workflow is reported in `09_pyGenomeTracks.sh`.
