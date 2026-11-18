@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Gene-family expansion and contraction with CAFE5.
+# Gene-family expansion and contraction with CAFE.
 # lambda -s estimates one global gain/loss rate. The value is not
 # supplied in advance.
 # load -r is the number of Monte Carlo samples used to calculate
