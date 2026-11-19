@@ -26,7 +26,7 @@ The corresponding command is reported in `03_RSeQC_strandness.sh`.
 
 ## S-locus transcript annotation
 
-S-RNase transcript models were reconstructed using StringTie v2.2.3 from RNA-seq alignments, including alignments restricted to the S-locus region of each haplotype. Assemblies used `--rf` and one thread.
+S-locus transcript models were reconstructed using StringTie v2.2.3 from RNA-seq alignments restricted to the chromosome 6 region bounded by the best BLASTn matches to the S-haplotype F-box (SFB) and S locus F-box (SLF) genes (GenBank accessions MH316096.1 and MH316056.1, respectively), previously reported to flank the S locus.
 
 Two complementary transcript-assembly strategies were used on the S-locus alignments:
 
