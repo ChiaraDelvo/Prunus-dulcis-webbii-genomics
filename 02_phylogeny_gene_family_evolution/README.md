@@ -14,7 +14,7 @@ Orthogroup inference was performed following the OrthoFinder v3.0.1b1 workflow, 
 The corresponding OrthoFinder command is reported in `01_OrthoFinder.sh`.
 ## Species tree
 
-The species-tree alignment produced by OrthoFinder was used for maximum-likelihood inference with IQ-TREE v2.4.0 under ModelFinder (`MFP`) and 1,000 ultrafast bootstrap replicates.
+The species-tree alignment produced by OrthoFinder was used for maximum-likelihood inference with IQ-TREE v2.4.0 under ModelFinder (`MFP`) and 100 ultrafast bootstrap replicates.
 
 The resolved gene trees were concatenated and summarised with ASTRAL-Pro3 v1.25.3.8, rooted on `Prunus_mume`. Each gene was mapped to the species given by the first two fields of its name.
 
