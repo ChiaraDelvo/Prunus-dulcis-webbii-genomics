@@ -20,4 +20,4 @@ Detailed software versions, commands, parameters, and input/output information a
 
 ## Data availability
 
-Raw sequencing data and genomic resources associated with the study are deposited in the repositories reported in the manuscript. 
+Raw sequencing data and genomic resources associated with this study are available through the repositories and accession numbers specified in the Data Availability section of the manuscript. 
