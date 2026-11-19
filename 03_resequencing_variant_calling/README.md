@@ -27,7 +27,6 @@ Sorted BAMs were called jointly with Platypus v0.8.1.1. Every `*.sorted.bam` in 
 - minimum mapping quality: 30
 - minimum number of supporting reads: 4
 - minimum base quality: 30
-- 20 CPUs
 - duplicated read pairs retained (`filterDuplicates = 0`)
 
 Commands are reported in `03_platypus_variant_calling.sh`.
@@ -43,7 +42,5 @@ Two filtered datasets were generated independently for each reference assembly:
 - `set1`: SNP call rate ≥90% and MAF ≥0.05.
 
 - `set2`: SNP call rate ≥90%, without MAF filtering.
-
-The filtering parameters originally applied in SVS are summarized in SVS_filtering_parameters.md.
 
 The SVS parameters are summarised in `SVS_filtering_parameters.md`.
